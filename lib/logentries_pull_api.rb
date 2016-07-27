@@ -1,5 +1,7 @@
-require "logentries_pull_api/version"
+require 'logentries_pull_api/version'
 
 module LogentriesPullApi
-  # Your code goes here...
+
+  autoload :Client, 'logentries_pull_api/client'
+
 end
