@@ -9,9 +9,12 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Balazs Szerencsi"]
   spec.email         = ["balazs.szerencsi@icloud.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = 'LogEntries Pull API.'
+  spec.description   = <<-DESCRIPTION
+  Ruby wrapper for LogEntries Pull API.
+  https://logentries.com/doc/api-download/
+  DESCRIPTION
+  spec.homepage      = 'https://github.com/BlasiusVonSzerencsi/logentries-pull-api-ruby'
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
