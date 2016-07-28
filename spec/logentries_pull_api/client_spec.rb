@@ -31,7 +31,7 @@ describe LogentriesPullApi::Client do
 
     it 'should assemble a proper LogEntries API URL' do
       expect(URI).to receive(:parse)
-                         .with 'https://pull.logentries.com/my_account_key/hosts/my_log_set_key/my_log_key/'
+                         .with 'https://pull.logentries.com/my_account_key/hosts/my_log_set_key/my_log_key/?format=json'
 
       subject.get
     end
@@ -41,7 +41,7 @@ describe LogentriesPullApi::Client do
       subject = described_class.new 'some_account_key', 'my log set key with whitespaces', 'log key with whitespaces'
 
       expect(URI).to receive(:parse)
-                         .with 'https://pull.logentries.com/some_account_key/hosts/my%20log%20set%20key%20with%20whitespaces/log%20key%20with%20whitespaces/'
+                         .with /my%20log%20set%20key%20with%20whitespaces\/log%20key%20with%20whitespaces/
 
       subject.get
     end
