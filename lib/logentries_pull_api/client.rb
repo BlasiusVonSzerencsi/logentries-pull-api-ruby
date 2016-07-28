@@ -21,7 +21,7 @@ module LogentriesPullApi
       uri = URI.parse "#{LOGENTRIES_API_URL}/#{account_key}/hosts/#{encoded_log_set_key}/#{encoded_log_key}/"
       uri.query = URI.encode_www_form format: 'json'
 
-      response = Net::HTTP.get_response uri.to_s
+      response = Net::HTTP.get_response uri
       JSON.parse response.body
     end
 
