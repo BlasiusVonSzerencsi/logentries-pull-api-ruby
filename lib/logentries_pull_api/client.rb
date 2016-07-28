@@ -1,5 +1,6 @@
 require 'json'
 require 'net/http'
+require 'uri'
 
 module LogentriesPullApi
   class Client
@@ -17,9 +18,10 @@ module LogentriesPullApi
       encoded_log_set_key = URI.encode log_set_key
       encoded_log_key = URI.encode log_key
 
-      uri = URI.parse "#{LOGENTRIES_API_URL}/#{account_key}/hosts/#{encoded_log_set_key}/#{encoded_log_key}/?format=json"
+      uri = URI.parse "#{LOGENTRIES_API_URL}/#{account_key}/hosts/#{encoded_log_set_key}/#{encoded_log_key}/"
+      uri.query = URI.encode_www_form format: 'json'
 
-      response = Net::HTTP.get_response uri
+      response = Net::HTTP.get_response uri.to_s
       JSON.parse response.body
     end
 
