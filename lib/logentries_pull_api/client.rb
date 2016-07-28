@@ -19,7 +19,8 @@ module LogentriesPullApi
 
       uri = URI.parse "#{LOGENTRIES_API_URL}/#{account_key}/hosts/#{encoded_log_set_key}/#{encoded_log_key}/?format=json"
 
-      Net::HTTP.get_response uri
+      response = Net::HTTP.get_response uri
+      JSON.parse response.body
     end
 
 
