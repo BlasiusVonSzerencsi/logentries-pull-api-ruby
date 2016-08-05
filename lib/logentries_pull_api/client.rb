@@ -16,24 +16,33 @@ module LogentriesPullApi
 
 
     def get(options = {})
+      response = fetch_response_from assemble_uri(options)
+
+      raise LogentriesPullApi::Error, response['reason'] if response.is_a? Hash
+
+      response
+    end
+
+    private
+
+    LOGENTRIES_API_URL = 'https://pull.logentries.com'
+
+
+    def assemble_uri(options)
       encoded_log_set_key = URI.encode log_set_key
       encoded_log_key = URI.encode log_key
 
       uri = URI.parse "#{LOGENTRIES_API_URL}/#{account_key}/hosts/#{encoded_log_set_key}/#{encoded_log_key}/"
       uri.query = URI.encode_www_form options.merge format: 'json'
 
-      response = Net::HTTP.get_response uri
-      parsed_response_body = JSON.parse response.body
-
-      raise LogentriesPullApi::Error, parsed_response_body['reason'] if parsed_response_body.is_a? Hash
-
-      parsed_response_body
+      uri
     end
 
 
-    private
-
-    LOGENTRIES_API_URL = 'https://pull.logentries.com'
+    def fetch_response_from(uri)
+      response = Net::HTTP.get_response uri
+      JSON.parse response.body
+    end
 
   end
 
