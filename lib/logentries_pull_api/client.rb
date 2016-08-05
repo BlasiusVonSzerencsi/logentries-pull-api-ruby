@@ -3,6 +3,7 @@ require 'net/http'
 require 'uri'
 
 module LogentriesPullApi
+
   class Client
 
     attr_reader :account_key, :log_set_key, :log_key
@@ -22,7 +23,13 @@ module LogentriesPullApi
       uri.query = URI.encode_www_form options.merge format: 'json'
 
       response = Net::HTTP.get_response uri
-      JSON.parse response.body
+      parsed_response_body = JSON.parse response.body
+
+      if parsed_response_body.is_a? Hash
+        raise LogentriesPullApi::Error
+      end
+
+      parsed_response_body
     end
 
 
@@ -31,4 +38,8 @@ module LogentriesPullApi
     LOGENTRIES_API_URL = 'https://pull.logentries.com'
 
   end
+
+  class Error < StandardError;
+  end
+
 end
