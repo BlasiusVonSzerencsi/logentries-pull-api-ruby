@@ -108,7 +108,7 @@ describe LogentriesPullApi::Client do
       it 'should raise LogentriesPullApi::Error on error responses' do
         allow(response).to receive(:body).and_return '{"reason":"Account s0m3-4cc0unt-k3y not found", "response":"error"}'
 
-        expect { subject.get }.to raise_error LogentriesPullApi::Error
+        expect { subject.get }.to raise_error LogentriesPullApi::Error, 'Account s0m3-4cc0unt-k3y not found'
       end
     end
 

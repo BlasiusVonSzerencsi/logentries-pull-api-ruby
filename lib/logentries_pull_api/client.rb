@@ -25,9 +25,7 @@ module LogentriesPullApi
       response = Net::HTTP.get_response uri
       parsed_response_body = JSON.parse response.body
 
-      if parsed_response_body.is_a? Hash
-        raise LogentriesPullApi::Error
-      end
+      raise LogentriesPullApi::Error, parsed_response_body['reason'] if parsed_response_body.is_a? Hash
 
       parsed_response_body
     end
@@ -39,7 +37,6 @@ module LogentriesPullApi
 
   end
 
-  class Error < StandardError;
-  end
+  class Error < StandardError; end
 
 end
