@@ -92,6 +92,13 @@ describe LogentriesPullApi::Client do
         subject.get limit: 123
       end
 
+
+      it 'should allow filtering result with pattern' do
+        expect(uri).to receive(:query=).with /filter=%2Fsome\+text%2Fi/
+
+        subject.get filter: '/some text/i'
+      end
+
     end
 
   end
