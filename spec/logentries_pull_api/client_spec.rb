@@ -86,7 +86,7 @@ describe LogentriesPullApi::Client do
     end
 
 
-    it 'should allow filtering for time range' do
+    it 'should allow filtering result set with time range' do
       allow(URI).to receive(:parse).and_return uri
       expect(uri).to receive(:query=).with /start=1432080000000&end=1432092600000/
       allow(Net::HTTP).to receive(:get_response).with(uri).and_return response
