@@ -85,6 +85,16 @@ describe LogentriesPullApi::Client do
       expect(subject.get).to eq [{'some_key' => 'some_value'}, {'another_key' => 'another_value'}]
     end
 
+
+    it 'should allow filtering for time range' do
+      allow(URI).to receive(:parse).and_return uri
+      expect(uri).to receive(:query=).with /start=1432080000000&end=1432092600000/
+      allow(Net::HTTP).to receive(:get_response).with(uri).and_return response
+      allow(response).to receive(:body).and_return '{}'
+
+      subject.get start: 1432080000000, end: 1432092600000
+    end
+
   end
 
 end
