@@ -95,6 +95,16 @@ describe LogentriesPullApi::Client do
       subject.get start: 1432080000000, end: 1432092600000
     end
 
+
+    it 'should allow limiting result set size' do
+      allow(URI).to receive(:parse).and_return uri
+      expect(uri).to receive(:query=).with /limit=123/
+      allow(Net::HTTP).to receive(:get_response).with(uri).and_return response
+      allow(response).to receive(:body).and_return '{}'
+
+      subject.get limit: 123
+    end
+
   end
 
 end
