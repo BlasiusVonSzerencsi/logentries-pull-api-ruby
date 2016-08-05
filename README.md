@@ -1,8 +1,8 @@
 # LogentriesPullApi
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/logentries_pull_api`. To experiment with that code, run `bin/console` for an interactive prompt.
+Ruby client for LogEntries Pull API.
 
-TODO: Delete this and the text above, and describe your gem
+For further details on the API itself please visit: https://logentries.com/doc/api-download/
 
 ## Installation
 
@@ -22,7 +22,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'logentries_pull_api'
+
+client = LogentriesPullApi::Client.new 'my-4cc0unt-k3y', 'Some Log Set', 'Some Log'
+
+all_messages = client.get
+
+filtered_messages = client.get start: 1432080000000, end: 1432092600000, limit: 100, filter: '/some log message/i'
+```
 
 ## Development
 
@@ -32,8 +40,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/logentries_pull_api.
-
+Bug reports and pull requests are welcome on GitHub at https://github.com/BlasiusVonSzerencsi/logentries-pull-api-ruby.
 
 ## License
 
